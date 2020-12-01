@@ -1,0 +1,19 @@
+.header {
+  max-width: 608px;
+  color: #fff;
+  align-self: center;
+}
+
+.header__title {
+  margin: 80px 0 32px;
+  font-family: 'Roboto Slab';
+  font-weight: 400;
+  font-size: 60px;
+  line-height: 64px;
+}
+
+.header__subtitle {
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 88px;
+}

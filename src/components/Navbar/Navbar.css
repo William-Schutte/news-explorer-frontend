@@ -1,0 +1,55 @@
+.navbar {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  height: 80px;
+  padding: 0 6.5rem;
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+}
+
+.navbar__logo {
+  font-family: 'Roboto Slab';
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  align-self: center;
+  text-decoration: none;
+  color: #fff;
+  margin-right: auto;
+}
+
+.navbar__link {
+  display: flex;
+  text-decoration: none;
+  align-self: center;
+  justify-content: center;
+  height: 100%;
+  width: 68px;
+  margin-right: 34px;
+}
+
+.navbar__link_active {
+  border-bottom: 3px solid #fff;
+}
+
+.navbar__link-text {
+  color: #fff;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  align-self: center;
+}
+
+.navbar__user {
+  height: 48px;
+  width: 176px;
+  border-radius: 100px;
+  align-self: center;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #fff;
+  box-sizing: border-box;
+  background: none;
+  border: 1px solid #fff;
+}
