@@ -1,0 +1,29 @@
+.about {
+  width: 100%;
+  display: flex;
+  padding: 80px 6.5rem;
+  box-sizing: border-box;
+}
+
+.about__pic {
+  border-radius: 1000px;
+  width: 464px;
+  height: 464px;
+}
+
+.about__info {
+  margin: 50px 40px 0 56px;
+}
+
+.about__title {
+  font-family: 'Roboto Slab';
+  font-size: 40px;
+  line-height: 46px;
+  padding-bottom: 24px;
+}
+
+.about__text {
+  font-size: 18px;
+  line-height: 24px;
+  padding-bottom: 18px;
+}

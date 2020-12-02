@@ -1,12 +1,14 @@
+import About from '../About/About';
 import Main from '../Main/Main';
+import NewsCardList from '../NewsCardList/NewsCardList';
 import './App.css';
 
 function App() {
   return (
     <div className="app">
       <Main />
-      <section className="newsCardList">Cards</section>
-      <section className="about">About me</section>
+      <NewsCardList />
+      <About />
       
       <main className="savedNews">
         <nav class="navbar">Nav Bar</nav>

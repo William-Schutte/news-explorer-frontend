@@ -1,0 +1,19 @@
+.newsCardList {
+  padding: 0 6.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.newsCardList__title {
+  font-family: 'Roboto Slab';
+  font-size: 40px;
+  line-height: 46px;
+  margin-top: 80px;
+  margin-bottom: 64px;
+}
+
+.newsCardList__container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
