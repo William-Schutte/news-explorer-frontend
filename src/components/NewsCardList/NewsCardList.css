@@ -1,11 +1,16 @@
 .newsCardList {
   padding: 0 6.5rem;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   box-sizing: border-box;
+  background-color: #efefef;
+  align-items: center;
 }
 
 .newsCardList__title {
   font-family: 'Roboto Slab';
+  align-self: flex-start;
   font-size: 40px;
   line-height: 46px;
   margin-top: 80px;
@@ -14,6 +19,27 @@
 
 .newsCardList__container {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  max-width: 1232px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.newsCardList__btn {
+  width: 288px;
+  height: 64px;
+  border-radius: 80px;
+  border: none;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  background-color: #fff;
+  cursor: pointer;
+  margin: 64px 0 80px;
+  box-shadow: 0 6px 10px 4px rgba(8, 29, 45, .1);
+
+}
+
+.newsCardList__btn:focus {
+  outline: none;
 }

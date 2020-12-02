@@ -1,4 +1,5 @@
 import About from '../About/About';
+import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import './App.css';
@@ -10,12 +11,12 @@ function App() {
       <NewsCardList />
       <About />
       
-      <main className="savedNews">
-        <nav class="navbar">Nav Bar</nav>
+      {/* <main className="savedNews">
+        <nav className="navbar">Nav Bar</nav>
         <header className="savedNewsHeader">Header Section</header>
         <section className="newsCardList"></section>
-      </main>
-      <footer>Footer Here</footer>
+      </main> */}
+      <Footer />
     </div>
   );
 }

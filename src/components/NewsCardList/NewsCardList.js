@@ -10,11 +10,11 @@ const NewsCardList = () => {
     <section className="newsCardList">
       <h3 className="newsCardList__title">Search Results</h3>
       <div className="newsCardList__container">
-        {articles.map((article) => (
-          <NewsCard data={article} />
+        {articles.map((article, i) => (
+          <NewsCard data={article} key={i}/>
         ))}
-        
       </div>
+      <button className="newsCardList__btn">Show more</button>
     </section>
   )
 }

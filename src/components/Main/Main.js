@@ -7,7 +7,7 @@ import './Main.css'
 
 const Main = () => {
   return (
-    <main class="main">
+    <main className="main">
         <Navbar />
         <Header />
         <SearchBar />
