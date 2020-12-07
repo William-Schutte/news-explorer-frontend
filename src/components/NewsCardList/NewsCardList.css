@@ -13,15 +13,16 @@
   align-self: flex-start;
   font-size: 40px;
   line-height: 46px;
-  margin-top: 80px;
-  margin-bottom: 64px;
+  font-weight: 400;
+  margin: 80px 0 0;
 }
 
 .newsCardList__container {
   width: 100%;
+  margin: 64px 0;
   display: grid;
   max-width: 1232px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1rem;
 }
 
@@ -35,11 +36,60 @@
   font-weight: 500;
   background-color: #fff;
   cursor: pointer;
-  margin: 64px 0 80px;
-  box-shadow: 0 6px 10px 4px rgba(8, 29, 45, .1);
-
+  margin: 0 0 80px;
+  box-shadow: 0 3px 5px 2px rgba(8, 29, 45, .05);
+  transition: .3s ease;
 }
 
 .newsCardList__btn:focus {
   outline: none;
+}
+
+.newsCardList__btn:hover {
+  background-color: #efefef;
+  box-shadow: 0 3px 5px 2px rgba(8, 29, 45, .15);
+}
+
+@media screen and (min-width: 701px) and (max-width: 1440px) {
+  .newsCardList {
+    padding: 0 2.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .newsCardList__title {
+    margin: 40px 0 0;
+    font-size: 30px;
+    line-height: 34px;
+  }
+  .newsCardList__container {
+    margin: 32px 0;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    justify-items: center;
+  }
+  .newsCardList__btn {
+    width: 240px;
+    height: 56px;
+    margin: 0 0 40px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .newsCardList {
+    padding: 0 1rem;
+  }
+  .newsCardList__title {
+    margin: 32px 0 0;
+  }
+  .newsCardList__btn {
+    margin: 0 0 32px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .newsCardList__container {
+    grid-template-columns: 1fr;
+    margin: 58px 0 16px;
+  }
 }

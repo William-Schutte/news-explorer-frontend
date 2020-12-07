@@ -2,19 +2,19 @@ import React from 'react'
 import NewsCard from '../NewsCard/NewsCard'
 import './NewsCardList.css'
 
-import newsData from '../../vendor/test_data'
-const articles = newsData.articles;
-
-const NewsCardList = () => {
+const NewsCardList = ({ type, articles }) => {
+  let count = (type === 'search') ? 3 : 100;
   return (
     <section className="newsCardList">
-      <h3 className="newsCardList__title">Search Results</h3>
+      {type === "search" && <h3 className="newsCardList__title">Search Results</h3>}
       <div className="newsCardList__container">
-        {articles.map((article, i) => (
-          <NewsCard data={article} key={i}/>
-        ))}
+        {articles.map((article, i) => {
+          if (i < count) { 
+            return (<NewsCard data={article} key={i} type={type} />)
+          }
+        })}
       </div>
-      <button className="newsCardList__btn">Show more</button>
+      {type === "search" && <button className="newsCardList__btn">Show more</button>}
     </section>
   )
 }

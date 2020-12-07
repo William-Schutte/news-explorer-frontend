@@ -8,7 +8,7 @@ import './Main.css'
 const Main = () => {
   return (
     <main className="main">
-        <Navbar />
+        <Navbar user="Will" />
         <Header />
         <SearchBar />
     </main>

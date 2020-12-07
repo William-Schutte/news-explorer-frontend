@@ -1,22 +1,33 @@
+import { Route, Switch } from 'react-router-dom';
 import About from '../About/About';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import NewsCardList from '../NewsCardList/NewsCardList';
+import SavedNews from '../SavedNews/SavedNews';
 import './App.css';
+
+import newsData from '../../vendor/test_data'
+import Popup from '../Popup/Popup';
+const articles = newsData.articles;
+
 
 function App() {
   return (
     <div className="app">
-      <Main />
-      <NewsCardList />
-      <About />
-      
-      {/* <main className="savedNews">
-        <nav className="navbar">Nav Bar</nav>
-        <header className="savedNewsHeader">Header Section</header>
-        <section className="newsCardList"></section>
-      </main> */}
+      <Switch>
+        <Route exact path="/">
+          <Main />
+          <NewsCardList type="search" articles={articles}/>
+          <About />
+        </Route>
+        <Route exact path="/savedNews">
+          <SavedNews />
+          <NewsCardList type="saved" articles={articles}/>
+        </Route>
+      </Switch>
       <Footer />
+
+      <Popup />
     </div>
   );
 }

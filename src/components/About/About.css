@@ -17,13 +17,52 @@
 
 .about__title {
   font-family: 'Roboto Slab';
+  font-weight: 400;
   font-size: 40px;
   line-height: 46px;
-  padding-bottom: 24px;
+  margin: 0 0 24px;
 }
 
 .about__text {
   font-size: 18px;
   line-height: 24px;
-  padding-bottom: 18px;
+  margin: 0 0 18px;
+}
+
+@media screen and (max-width: 1440px) {
+  .about {
+    padding: 2.5rem;
+  }
+  .about__pic {
+    width: 232px;
+    height: 232px;
+    margin: 20px 0;
+  }
+  .about__info {
+    margin: 0 0 0 2rem;
+    height: min-content;
+    align-self: center;
+  }
+  .about__title {
+    font-size: 30px;
+    line-height: 40px;
+    margin: 0 0 1rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .about {
+    flex-direction: column;
+    padding: 1rem;
+    align-items: center;
+  }
+  .about__info {
+    margin: 0;
+    height: min-content;
+    align-self: center;
+  }
+  .about__pic {
+    max-width: 300px;
+    max-height: 300px;
+  }
 }

@@ -6,3 +6,9 @@
   background: linear-gradient(0deg,rgba(0,0,0,.5) 0%, rgba(0,0,0,.5) 100%), url('../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.png') no-repeat center;
   background-size: cover;
 }
+
+@media screen and (max-width: 500px) {
+  .main {
+    height: 100vh;
+  }
+}

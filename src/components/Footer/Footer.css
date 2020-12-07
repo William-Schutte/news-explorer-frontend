@@ -34,3 +34,32 @@
 .footer__icon:last-of-type {
   margin-left: 28px;
 }
+
+.footer__mobile {
+  display: flex;
+  width: 100%;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  justify-content: left;
+}
+
+@media screen and (max-width: 700px) {
+  .footer {
+    padding: 20px 1rem 0;
+    flex-direction: column;
+  }
+  .footer__link {
+    text-align: left;
+    padding-bottom: 24px;
+  }
+  .footer__copyright {
+    padding-bottom: 22px;
+  }
+  .footer__icon {
+    margin-left: 28px;
+  }
+}

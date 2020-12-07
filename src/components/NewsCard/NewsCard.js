@@ -1,7 +1,7 @@
 import React from 'react'
 import './NewsCard.css'
 
-const NewsCard = ({ data }) => {
+const NewsCard = ({ data, type }) => {
   
   function formatDate(date) {
     const dt = new Date(date);
@@ -23,10 +23,17 @@ const NewsCard = ({ data }) => {
   return (
     <article className="newsCard">
       <img className="newsCard__img" src={data.urlToImage} alt={data.title} />
-      <button className="newsCard__save">
-        <i className="far fa-bookmark"></i>
+      <button className="newsCard__interact">
+        {type === "saved" ? 
+          <div className="newsCard__help">Remove from saved</div>
+          : <div className="newsCard__help">Sign in to save articles</div>
+        }
+        <div className="newsCard__btn">
+          {type === "saved" ? <i class="far fa-trash-alt"/>: <i className="far fa-bookmark"/>}
+        </div>
+        
       </button>
-      <p className="newsCard__topic">Topic</p>
+      {type === "saved" && <p className="newsCard__topic">Topic</p>}
       <div className="newsCard__container">
         <p className="newsCard__date">{formatDate(data.publishedAt)}</p>
         <h4 className="newsCard__title">{cleanTitle(data.title)}</h4>
