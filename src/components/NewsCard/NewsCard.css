@@ -103,7 +103,7 @@
 }
 
 .newsCard__date {
-  font-family: 'Source Sans Pro';
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 18px;
   line-height: 24px;
   margin: 0 0 12px;
@@ -111,7 +111,7 @@
 }
 
 .newsCard__title {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', serif;
   font-size: 26px;
   line-height: 30px;
   margin: 0 0 16px;
@@ -130,7 +130,7 @@
 
 .newsCard__source {
   color: #b6bcbf;
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;

@@ -17,7 +17,7 @@
 }
 
 .navbar__logo {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
@@ -123,14 +123,14 @@
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
-  top: -250px;
+  top: -450px;
   z-index: -1;
   opacity: 0;
   left: 0;
   padding: 96px 1rem 1.5rem;
   margin: 0;
   background: #1a1b22;
-  transition: .3s ease-in-out;
+  transition: .4s ease-in-out;
   justify-items: center;
   border-radius: 16px;
 }

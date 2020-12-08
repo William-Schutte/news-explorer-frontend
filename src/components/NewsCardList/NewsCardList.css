@@ -9,7 +9,7 @@
 }
 
 .newsCardList__title {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', serif;
   align-self: flex-start;
   font-size: 40px;
   line-height: 46px;
@@ -22,7 +22,7 @@
   margin: 64px 0;
   display: grid;
   max-width: 1232px;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1rem;
 }
 
@@ -64,7 +64,7 @@
   }
   .newsCardList__container {
     margin: 32px 0;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 8px;
     justify-items: center;
   }
