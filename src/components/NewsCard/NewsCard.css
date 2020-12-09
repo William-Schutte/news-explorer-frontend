@@ -77,6 +77,10 @@
   justify-content: center;
 }
 
+.newsCard__saved {
+  color: #2f71e5;
+}
+
 .newsCard__topic {
   position: absolute;
   display: flex;

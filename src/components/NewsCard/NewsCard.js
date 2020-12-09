@@ -23,16 +23,15 @@ const NewsCard = ({ data, type }) => {
   return (
     <article className="newsCard">
       <img className="newsCard__img" src={data.urlToImage} alt={data.title} />
-      <button className="newsCard__interact">
+      <div className="newsCard__interact">
         {type === "saved" ? 
           <div className="newsCard__help">Remove from saved</div>
           : <div className="newsCard__help">Sign in to save articles</div>
         }
         <div className="newsCard__btn">
-          {type === "saved" ? <i class="far fa-trash-alt"/>: <i className="far fa-bookmark"/>}
+          {type === "saved" ? <i class="far fa-trash-alt"/> : <i className={`${data.saved ? `fas newsCard__saved` : `far`} fa-bookmark`}/>}
         </div>
-        
-      </button>
+      </div>
       {type === "saved" && <p className="newsCard__topic">Topic</p>}
       <div className="newsCard__container">
         <p className="newsCard__date">{formatDate(data.publishedAt)}</p>

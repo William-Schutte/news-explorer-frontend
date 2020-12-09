@@ -13,7 +13,8 @@ const data = {
           "url": "https://www.cnn.com/2020/12/01/health/cdc-acip-covid-19-vaccine-recommendation-vote/index.html",
           "urlToImage": "https://cdn.cnn.com/cnnnext/dam/assets/201119175637-03-pfizer-vaccine-vials-super-tease.jpg",
           "publishedAt": "2020-12-02T00:19:00Z",
-          "content": "(CNN)Vaccine advisers to the US Centers for Disease Control and Prevention voted 13-1 on Tuesday to recommend that both health care workers and residents of long-term care facilities be first in line… [+4109 chars]"
+          "content": "(CNN)Vaccine advisers to the US Centers for Disease Control and Prevention voted 13-1 on Tuesday to recommend that both health care workers and residents of long-term care facilities be first in line… [+4109 chars]",
+          "saved": "true"
       },
       {
           "source": {

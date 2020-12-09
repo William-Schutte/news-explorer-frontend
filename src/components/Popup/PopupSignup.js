@@ -24,7 +24,7 @@ const PopupSignup = ({ changePopupType }) => {
 
           <button className="popup__submit popup__submit_inactive">Sign up</button>
         </form>
-        <p className="popup__alternative">or&nbsp;<p className="popup__other-link" onClick={handleChangePopup}>Sign in</p></p>
+        <p className="popup__alternative">or&nbsp;<span className="popup__other-link" onClick={handleChangePopup}>Sign in</span></p>
     </>
   )
 }

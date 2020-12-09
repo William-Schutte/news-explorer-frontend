@@ -23,7 +23,7 @@ const PopupSignin = ({ changePopupType }) => {
 
           <button type="submit" className="popup__submit popup__submit_inactive" disabled onClick={handleSubmit}>Sign in</button>
         </form>
-        <p className="popup__alternative">or&nbsp;<p className="popup__other-link" onClick={handleChangePopup}>Sign up</p></p>
+        <p className="popup__alternative">or&nbsp;<span className="popup__other-link" onClick={handleChangePopup}>Sign up</span></p>
     </>
   )
 }

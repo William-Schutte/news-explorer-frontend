@@ -5,12 +5,12 @@ import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import SavedNews from '../SavedNews/SavedNews';
+import Popup from '../Popup/Popup';
+import Preloader from '../Preloader/Preloader';
 import './App.css';
 
 import newsData from '../../vendor/test_data'
-import Popup from '../Popup/Popup';
 const articles = newsData.articles;
-
 
 class App extends React.Component {
   constructor() {
@@ -47,7 +47,8 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/">
             <Main handlePopup={this.handlePopupOpen} isOpen={this.state.isPopupOpen} user={this.state.activeUser} />
-            <NewsCardList type="search" articles={articles} />
+            <Preloader searching={true}/>
+            {/* <NewsCardList type="search" articles={articles} /> */}
             <About />
           </Route>
           <Route exact path="/savedNews">
