@@ -21,8 +21,8 @@ const Footer = () => {
           <p className="footer__copyright">&#169; 2020 William Schutte, Powered by News API</p>
           <NavLink exact to="/" className="footer__link">Home</NavLink>
           <a className="footer__link" href="https://practicum.yandex.com/web/">Practicum by Yandex</a>
-          <a className="footer__icon" href="https://github.com/William-Schutte" target="_blank" rel="noreferrer" ><i class="fab fa-github"></i></a>
-          <a className="footer__icon" href="https://www.linkedin.com/in/william-schutte/" target="_blank" rel="noreferrer"><i class="fab fa-linkedin"></i></a>
+          <a className="footer__icon" href="https://github.com/William-Schutte" target="_blank" rel="noreferrer" ><i className="fab fa-github"></i></a>
+          <a className="footer__icon" href="https://www.linkedin.com/in/william-schutte/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin"></i></a>
         </>
       }
       {width <= MOBILE_WIDTH && 
@@ -32,8 +32,8 @@ const Footer = () => {
               <NavLink exact to="/" className="footer__link">Home</NavLink>
               <a className="footer__link" href="https://practicum.yandex.com/web/">Practicum by Yandex</a>
             </div>
-            <a className="footer__icon" href="https://github.com/William-Schutte" target="_blank" rel="noreferrer" ><i class="fab fa-github"/></a>
-            <a className="footer__icon" href="https://www.linkedin.com/in/william-schutte/" target="_blank" rel="noreferrer"><i class="fab fa-linkedin"/></a>
+            <a className="footer__icon" href="https://github.com/William-Schutte" target="_blank" rel="noreferrer" ><i className="fab fa-github"/></a>
+            <a className="footer__icon" href="https://www.linkedin.com/in/william-schutte/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin"/></a>
           </div>
           <p className="footer__copyright">&#169; 2020 William Schutte, Powered by News API</p>
         </>

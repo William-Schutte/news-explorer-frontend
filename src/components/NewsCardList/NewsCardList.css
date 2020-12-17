@@ -22,7 +22,7 @@
   margin: 64px 0;
   display: grid;
   max-width: 1232px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem;
 }
 

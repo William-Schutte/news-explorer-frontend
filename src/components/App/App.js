@@ -8,8 +8,9 @@ import SavedNews from '../SavedNews/SavedNews';
 import Popup from '../Popup/Popup';
 import Preloader from '../Preloader/Preloader';
 import './App.css';
+import newsApi from '../../utils/NewsApi';
 
-import newsData from '../../vendor/test_data'
+import newsData from '../../vendor/test_data';
 const articles = newsData.articles;
 
 class App extends React.Component {
@@ -18,11 +19,16 @@ class App extends React.Component {
     this.state = {
       isPopupOpen: false,
       activeUser: null,
+      isLoading: false,
+      noResults: false,
+      searchError: false,
       popupType: 'signin',
+      searchedNews: [],
     }
     this.handleSigninOpen = this.handleSigninOpen.bind(this);
     this.handlePopupOpen = this.handlePopupOpen.bind(this);
     this.handleChangePopup = this.handleChangePopup.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   handleSigninOpen() {
@@ -41,14 +47,30 @@ class App extends React.Component {
     this.setState({ popupType: newType })
   }
 
+  handleSearch(keyword) { 
+    this.setState({ isLoading: true, noResults: false, searchError: false, searchedNews: [] });
+    newsApi.getNews(keyword)
+      .then((newNews) => {
+        if (newNews.error || newNews.status === "error") {
+          this.setState({ noResults: true, searchError: true })
+        } else if (newNews.totalResults != null) {
+          if (newNews.totalResults > 0) {
+            this.setState({ searchedNews: newNews.articles, isLoading: false })
+          } else {
+            this.setState({ noResults: true });
+          }
+        }  
+      });
+  }
+
   render() {
     return (
       <div className="app">
         <Switch>
           <Route exact path="/">
-            <Main handlePopup={this.handlePopupOpen} isOpen={this.state.isPopupOpen} user={this.state.activeUser} />
-            <Preloader searching={true}/>
-            {/* <NewsCardList type="search" articles={articles} /> */}
+            <Main handlePopup={this.handlePopupOpen} handleSearch={this.handleSearch} isOpen={this.state.isPopupOpen} user={this.state.activeUser} />
+            {this.state.isLoading && <Preloader noResults={this.state.noResults} error={this.state.searchError}/>}
+            {this.state.searchedNews.length > 0 && <NewsCardList type="search" articles={this.state.searchedNews} />}
             <About />
           </Route>
           <Route exact path="/savedNews">

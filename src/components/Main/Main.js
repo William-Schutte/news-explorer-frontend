@@ -5,12 +5,12 @@ import SearchBar from '../SearchBar/SearchBar'
 import './Main.css'
 
 
-const Main = ({ handlePopup, user, isOpen }) => {
+const Main = ({ handlePopup, handleSearch, user, isOpen }) => {
   return (
     <main className="main">
         <Navbar handlePopup={handlePopup} user={user} isOpen={isOpen} />
         <Header />
-        <SearchBar />
+        <SearchBar handleSearch={handleSearch} />
     </main>
   )
 }
