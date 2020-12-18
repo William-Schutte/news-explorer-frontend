@@ -1,8 +1,11 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import './Navbar.css'
+import { CurrentUserContext } from '../App/App';
 
-const Navbar = ({ alt, user, handlePopup, isOpen }) => {
+const Navbar = ({ alt, handlePopup, isOpen }) => {
+  const user = React.useContext(CurrentUserContext);
+
   const MOBILE_WIDTH = 700;
   const [width, setWidth] = React.useState(window.innerWidth);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);

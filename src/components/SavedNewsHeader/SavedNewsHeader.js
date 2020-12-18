@@ -1,5 +1,6 @@
 import React from 'react'
 import './SavedNewsHeader.css'
+import { CurrentUserContext } from '../App/App';
 
 const SavedNewsHeader = () => {
   return (

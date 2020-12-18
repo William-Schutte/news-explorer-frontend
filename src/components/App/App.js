@@ -9,9 +9,9 @@ import Popup from '../Popup/Popup';
 import Preloader from '../Preloader/Preloader';
 import './App.css';
 import newsApi from '../../utils/NewsApi';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import newsData from '../../vendor/test_data';
-const articles = newsData.articles;
+export const CurrentUserContext = React.createContext();
 
 class App extends React.Component {
   constructor() {
@@ -63,23 +63,33 @@ class App extends React.Component {
       });
   }
 
+  onRegister() {}
+  onLogin() {}
+  onSignOut() {}
+
   render() {
     return (
       <div className="app">
-        <Switch>
-          <Route exact path="/">
-            <Main handlePopup={this.handlePopupOpen} handleSearch={this.handleSearch} isOpen={this.state.isPopupOpen} user={this.state.activeUser} />
-            {this.state.isLoading && <Preloader noResults={this.state.noResults} error={this.state.searchError}/>}
-            {this.state.searchedNews.length > 0 && <NewsCardList type="search" articles={this.state.searchedNews} />}
-            <About />
-          </Route>
-          <Route exact path="/savedNews">
-            <SavedNews user={this.state.activeUser} />
-            <NewsCardList type="saved" articles={articles} />
-          </Route>
-        </Switch>
-        <Footer />
+        <CurrentUserContext.Provider value={this.state.activeUser}>
+          <Switch>
+            <Route exact path="/">
+              <Main handlePopup={this.handlePopupOpen} handleSearch={this.handleSearch} isOpen={this.state.isPopupOpen} user={this.state.activeUser} />
+              {this.state.isLoading && <Preloader noResults={this.state.noResults} error={this.state.searchError}/>}
+              {this.state.searchedNews.length > 0 && <NewsCardList type="search" articles={this.state.searchedNews} />}
+              <About />
+            </Route>
+            <ProtectedRoute exact path="/savedNews" user={this.state.activeUser}>
+              <SavedNews user={this.state.activeUser} />
+              <NewsCardList type="saved" articles={[]} />
+            </ProtectedRoute>
 
+            {/* <Route exact path="/savedNews">
+              <SavedNews user={this.state.activeUser} />
+              <NewsCardList type="saved" articles={[]} />
+            </Route> */}
+          </Switch>
+        </CurrentUserContext.Provider>
+        <Footer />
         <Popup isOpen={this.state.isPopupOpen} popupType={this.state.popupType} changePopup={this.handleChangePopup} handlePopup={this.handlePopupOpen}/>
       </div>
     );
