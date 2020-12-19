@@ -7,9 +7,10 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import SavedNews from '../SavedNews/SavedNews';
 import Popup from '../Popup/Popup';
 import Preloader from '../Preloader/Preloader';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 import newsApi from '../../utils/NewsApi';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import mainApi from '../../utils/MainApi';
 
 export const CurrentUserContext = React.createContext();
 
@@ -22,6 +23,7 @@ class App extends React.Component {
       isLoading: false,
       noResults: false,
       searchError: false,
+      regFail: false,
       popupType: 'signin',
       searchedNews: [],
     }
@@ -29,6 +31,9 @@ class App extends React.Component {
     this.handlePopupOpen = this.handlePopupOpen.bind(this);
     this.handleChangePopup = this.handleChangePopup.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.onLogin = this.onLogin.bind(this);
+    this.onRegister = this.onRegister.bind(this);
+    this.onSignOut = this.onSignOut.bind(this);
   }
 
   handleSigninOpen() {
@@ -47,7 +52,7 @@ class App extends React.Component {
     this.setState({ popupType: newType })
   }
 
-  handleSearch(keyword) { 
+  handleSearch(keyword) {
     this.setState({ isLoading: true, noResults: false, searchError: false, searchedNews: [] });
     newsApi.getNews(keyword)
       .then((newNews) => {
@@ -55,17 +60,36 @@ class App extends React.Component {
           this.setState({ noResults: true, searchError: true })
         } else if (newNews.totalResults != null) {
           if (newNews.totalResults > 0) {
+            console.log(newNews.articles)
             this.setState({ searchedNews: newNews.articles, isLoading: false })
           } else {
             this.setState({ noResults: true });
           }
-        }  
+        }
       });
   }
 
-  onRegister() {}
-  onLogin() {}
-  onSignOut() {}
+  onRegister(values) {
+    mainApi.register(values)
+      .then((res) => {
+        if (res) {
+          // If successful, show success popup/change popup
+          console.log(res);
+          this.setState({ regFail: false, popupType: 'success' });
+        }
+      })
+      .catch((err) => {
+        this.setState({ regFail: true });
+      });
+  }
+
+  onLogin(values) {
+    mainApi.logIn(values);
+  }
+
+  onSignOut() {
+    mainApi.logOut();
+  }
 
   render() {
     return (
@@ -74,7 +98,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/">
               <Main handlePopup={this.handlePopupOpen} handleSearch={this.handleSearch} isOpen={this.state.isPopupOpen} user={this.state.activeUser} />
-              {this.state.isLoading && <Preloader noResults={this.state.noResults} error={this.state.searchError}/>}
+              {this.state.isLoading && <Preloader noResults={this.state.noResults} error={this.state.searchError} />}
               {this.state.searchedNews.length > 0 && <NewsCardList type="search" articles={this.state.searchedNews} />}
               <About />
             </Route>
@@ -82,15 +106,18 @@ class App extends React.Component {
               <SavedNews user={this.state.activeUser} />
               <NewsCardList type="saved" articles={[]} />
             </ProtectedRoute>
-
-            {/* <Route exact path="/savedNews">
-              <SavedNews user={this.state.activeUser} />
-              <NewsCardList type="saved" articles={[]} />
-            </Route> */}
           </Switch>
         </CurrentUserContext.Provider>
         <Footer />
-        <Popup isOpen={this.state.isPopupOpen} popupType={this.state.popupType} changePopup={this.handleChangePopup} handlePopup={this.handlePopupOpen}/>
+        <Popup
+          isOpen={this.state.isPopupOpen}
+          popupType={this.state.popupType}
+          regFail={this.state.regFail}
+          changePopup={this.handleChangePopup}
+          handlePopup={this.handlePopupOpen}
+          handleSignin={this.onLogin}
+          handleSignup={this.onRegister}
+        />
       </div>
     );
   }

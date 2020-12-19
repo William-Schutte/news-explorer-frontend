@@ -1,5 +1,6 @@
 import React from 'react'
 import './NewsCard.css'
+import notFoundImg from '../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.png'
 
 const NewsCard = ({ data, type }) => {
   
@@ -16,13 +17,16 @@ const NewsCard = ({ data, type }) => {
   }
 
   function cleanText(text) {
+    if (text === null) {
+      return "No summary available for this article";
+    }
     const i = text.lastIndexOf(' [+');
     return text.slice(0, i);
   }
 
   return (
     <article className="newsCard">
-      <img className="newsCard__img" src={data.urlToImage} alt={data.title} />
+      <img className="newsCard__img" src={data.urlToImage !== null ? data.urlToImage : notFoundImg} alt={data.title} />
       <div className="newsCard__interact">
         {type === "saved" ? 
           <div className="newsCard__help">Remove from saved</div>

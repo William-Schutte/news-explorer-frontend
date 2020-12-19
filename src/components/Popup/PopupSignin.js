@@ -1,17 +1,18 @@
 import React, { useCallback } from 'react'
 
-const PopupSignin = ({ changePopupType }) => {
+const PopupSignin = ({ changePopupType, onSubmit }) => {
   const [values, setValues] = React.useState({ email: '', password: '' });
   const [errors, setErrors] = React.useState();
   const [isValid, setIsValid] = React.useState(false);
 
   function handleChangePopup() {
-    changePopupType('signup')
+    resetForm();
+    changePopupType('signup');
   }
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    console.log(values);
+    onSubmit(values);
     resetForm();
   }
 
@@ -44,7 +45,6 @@ const PopupSignin = ({ changePopupType }) => {
         <label className="popup__label">Password</label>
         <input className="popup__input" name="password" value={values.password} type="password" placeholder="Enter password" minLength="5" required onChange={handleChange}></input>
         <p className="popup__span">{(errors && errors.password) && "Password must be at least 5 characters"}</p>
-
         <button type="submit" className={`popup__submit ${!isValid && `popup__submit_inactive`}`} disabled={!isValid} onClick={handleSubmit}>Sign in</button>
       </form>
       <p className="popup__alternative">or&nbsp;<span className="popup__other-link" onClick={handleChangePopup}>Sign up</span></p>
