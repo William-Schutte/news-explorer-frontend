@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from '../Navbar/Navbar'
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader'
+import { CurrentUserContext } from '../App/App'
 import './SavedNews.css'
 
-const SavedNews = ({ user }) => {
+const SavedNews = ({ articles }) => {
+  const user = useContext(CurrentUserContext)
+
   return (
     <main className="savedNews">
       <Navbar alt="true" user={user} />
-      <SavedNewsHeader />
+      <SavedNewsHeader savedNews={articles} />
     </main>
   )
 }

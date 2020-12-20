@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Route, Redirect } from 'react-router-dom'
+import { CurrentUserContext } from '../App/App'
 
 const ProtectedRoute = (props) => {
+  const user = useContext(CurrentUserContext);
+
   return (
     <Route>
       {
-        () => props.user ? <>{props.children}</> : <Redirect to="/" />
+        () => user ? <>{props.children}</> : <Redirect to="/" />
       }
     </Route>
   )

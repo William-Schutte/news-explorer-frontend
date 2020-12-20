@@ -3,7 +3,7 @@ import NewsCard from '../NewsCard/NewsCard'
 import './NewsCardList.css'
 
 const NewsCardList = ({ type, articles }) => {
-  const [articleCount, setArticleCount] = React.useState(type === 'search' ? 3 : 50);
+  const [articleCount, setArticleCount] = React.useState(type === 'search' ? 3 : 30);
 
   function handleShowMore() {
     setArticleCount(articleCount + 3);

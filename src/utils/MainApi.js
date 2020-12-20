@@ -3,6 +3,67 @@ class MainApi {
     this.options = options;
   }
 
+  getUser(token) {
+    return fetch(`${this.options.baseUrl}/users/me`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+      });
+  }
+
+  getSavedNews(token) {
+    return fetch(`${this.options.baseUrl}/articles`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+      });
+  }
+
+  saveArticle(token) {
+    return fetch(`${this.options.baseUrl}/articles`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+      });
+  }
+
+  deleteArticle(token) {
+    return fetch(`${this.options.baseUrl}/articles`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+      });
+  }
+
+
   logIn(values) {
     const { email, password } = values;
     return fetch(`${this.options.baseUrl}/signin`, {
@@ -24,7 +85,7 @@ class MainApi {
       })
       .then((data) => {
         localStorage.setItem('jwt', data.token);
-        return data.user;
+        return data.token;
       })
   }
 
@@ -53,7 +114,7 @@ class MainApi {
   }
 
   logOut() {
-
+    
   }
 }
 

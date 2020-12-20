@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom'
 import './Navbar.css'
 import { CurrentUserContext } from '../App/App';
 
-const Navbar = ({ alt, handlePopup, isOpen }) => {
+const Navbar = ({ alt, handlePopup, handleSignOut, isOpen }) => {
   const user = React.useContext(CurrentUserContext);
 
   const MOBILE_WIDTH = 700;
@@ -41,7 +41,7 @@ const Navbar = ({ alt, handlePopup, isOpen }) => {
             </NavLink>
           }
           {user != null ?
-            <button className={`navbar__user ${alt && `navbar__user_alt`}`}>{user.name}<i class="navbar__user-icon fas fa-sign-out-alt"></i></button>
+            <button className={`navbar__user ${alt && `navbar__user_alt`}`} onClick={handleSignOut}>{user.name}<i className="navbar__user-icon fas fa-sign-out-alt"></i></button>
             : <button className={`navbar__signin ${alt && `navbar__user_alt`}`} onClick={handlePopup}>Sign In</button>
           }
         </>
@@ -49,8 +49,8 @@ const Navbar = ({ alt, handlePopup, isOpen }) => {
 
       {(width <= MOBILE_WIDTH) && (
         <>
-          {isOpen ? <button className={`navbar__menu-icon ${alt && `navbar__color_alt`}`} onClick={handlePopup}><i class="fas fa-times" /></button>
-          : <button className={`navbar__menu-icon ${alt && `navbar__color_alt`}`} onClick={handleMenu}><i class="fas fa-equals" /></button>}
+          {isOpen ? <button className={`navbar__menu-icon ${alt && `navbar__color_alt`}`} onClick={handlePopup}><i className="fas fa-times" /></button>
+          : <button className={`navbar__menu-icon ${alt && `navbar__color_alt`}`} onClick={handleMenu}><i className="fas fa-equals" /></button>}
           <div className={`navbar__filter ${isMenuOpen ? `navbar__filter_active` : ``}`} />
           <menu className={`navbar__menu ${isMenuOpen ? `navbar__menu_open` : ``}`}>
             <Link exact to="/" className="navbar__menu-link">
@@ -61,7 +61,7 @@ const Navbar = ({ alt, handlePopup, isOpen }) => {
                 <p className={`navbar__menu-link-text`}>Saved Articles</p>
               </Link>}
             {user != null ?
-              <button className={`navbar__user navbar__menu-user`}>{user.name}<i class="navbar__user-icon fas fa-sign-out-alt"></i></button>
+              <button className={`navbar__user navbar__menu-user`} onClick={handleSignOut}>{user.name}<i className="navbar__user-icon fas fa-sign-out-alt"></i></button>
               : <button className={`navbar__signin navbar__menu-user`} onClick={handleMobilePopup}>Sign In</button>}
           </menu>
         </>

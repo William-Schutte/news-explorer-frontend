@@ -5,12 +5,12 @@ import SearchBar from '../SearchBar/SearchBar'
 import './Main.css'
 import { CurrentUserContext } from '../App/App';
 
-const Main = ({ handlePopup, handleSearch, isOpen }) => {
+const Main = ({ handlePopup, handleSearch, handleSignOut, isOpen }) => {
   const user = React.useContext(CurrentUserContext);
 
   return (
     <main className="main">
-        <Navbar handlePopup={handlePopup} user={user} isOpen={isOpen} />
+        <Navbar handlePopup={handlePopup} handleSignOut={handleSignOut} user={user} isOpen={isOpen} />
         <Header />
         <SearchBar handleSearch={handleSearch} />
     </main>
