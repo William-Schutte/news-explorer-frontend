@@ -20,6 +20,7 @@ class App extends React.Component {
     this.state = {
       isPopupOpen: false,
       activeUser: null,
+      jwt: null,
       isLoading: false,
       noResults: false,
       searchError: false,
@@ -32,6 +33,8 @@ class App extends React.Component {
     this.handlePopupOpen = this.handlePopupOpen.bind(this);
     this.handleChangePopup = this.handleChangePopup.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.checkSearchedForSaved = this.checkSearchedForSaved.bind(this);
+    this.handleSaveArticleClick = this.handleSaveArticleClick.bind(this);
     this.onLogin = this.onLogin.bind(this);
     this.onRegister = this.onRegister.bind(this);
     this.onSignOut = this.onSignOut.bind(this);
@@ -54,7 +57,6 @@ class App extends React.Component {
 
       mainApi.getSavedNews(jwt)
         .then((res) => {
-          console.log(res)
           this.setState({
             savedNews: res.data,
           })
@@ -81,6 +83,23 @@ class App extends React.Component {
     this.setState({ popupType: newType })
   }
 
+  checkSearchedForSaved(articles, keyword) {
+    const savedTitles = this.state.savedNews.map((article) => article.title);
+    const searchedArticles = articles.map((article) => {
+      return {
+        title: article.title,
+        text: article.content,
+        date: article.publishedAt,
+        source: article.source.name,
+        link: article.url,
+        image: article.urlToImage,
+        saved: (savedTitles.includes(article.title)),
+        keyword: keyword
+      }
+    });
+    return searchedArticles;
+  }
+
   handleSearch(keyword) {
     this.setState({ isLoading: true, noResults: false, searchError: false, searchedNews: [] });
     newsApi.getNews(keyword)
@@ -89,9 +108,7 @@ class App extends React.Component {
           this.setState({ noResults: true, searchError: true })
         } else if (newNews.totalResults != null) {
           if (newNews.totalResults > 0) {
-            console.log(newNews.articles)
-            // Not the best approach, write a function that checks articles against saved news for saved status
-            const searched = newNews.articles.map((article) => { return {...article, saved: false }})
+            const searched = this.checkSearchedForSaved(newNews.articles, keyword)
             this.setState({ searchedNews: searched, isLoading: false })
           } else {
             this.setState({ noResults: true });
@@ -100,9 +117,22 @@ class App extends React.Component {
       });
   }
 
-  handleSaveArticleClick() {
+  handleSaveArticleClick(articleData, saved) {
     // Add to savedNews, update searchedNews card
     // or Remove from savedNews, update searchedNews card
+    if (saved) {
+      mainApi.deleteArticle(this.state.jwt, articleData.id)
+    } else {
+      mainApi.saveArticle({
+        token: this.state.jwt,
+        userId: this.state.activeUser._id,
+        article: articleData
+      })
+        .then((article) => {
+          this.setState({ savedNews: [...this.state.savedNews, {...article, saved: true} ]});
+        });
+    }
+
   }
 
   onRegister(values) {
@@ -110,7 +140,6 @@ class App extends React.Component {
       .then((res) => {
         if (res) {
           // If successful, show success popup/change popup
-          console.log(res);
           this.setState({ regFail: false, popupType: 'success' });
         }
       })
@@ -143,17 +172,17 @@ class App extends React.Component {
                 handlePopup={this.handlePopupOpen}
                 handleSearch={this.handleSearch}
                 handleSignOut={this.onSignOut}
-                isOpen={this.state.isPopupOpen} 
+                isOpen={this.state.isPopupOpen}
               />
               {/* If loading, will display the preloader or 'not found' error */}
               {this.state.isLoading && <Preloader noResults={this.state.noResults} error={this.state.searchError} />}
               {/* Once done loading will show articles */}
-              {this.state.searchedNews.length > 0 && <NewsCardList type="search" articles={this.state.searchedNews} />}
+              {this.state.searchedNews.length > 0 && <NewsCardList type="search" articles={this.state.searchedNews} handleSave={this.handleSaveArticleClick} />}
               <About />
             </Route>
             <ProtectedRoute exact path="/savedNews">
-              <SavedNews articles={this.state.savedNews} />
-              <NewsCardList type="saved" articles={this.state.savedNews} />
+              <SavedNews articles={this.state.savedNews} handleSignOut={this.onSignOut} />
+              <NewsCardList type="saved" articles={this.state.savedNews} handleSave={this.handleSaveArticleClick} />
             </ProtectedRoute>
           </Switch>
         </CurrentUserContext.Provider>

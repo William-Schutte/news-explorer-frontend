@@ -33,13 +33,25 @@ class MainApi {
       });
   }
 
-  saveArticle(token) {
+  saveArticle({ token, userId, article }) {
+    const { title, text, date, source, link, image, keyword } = article;
+    console.log(article);
     return fetch(`${this.options.baseUrl}/articles`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
+      body: JSON.stringify({
+        "keyword": keyword,
+        "title": title,
+        "text": text,
+        "date": date,
+        "source": source,
+        "link": link,
+        "image": image,
+        "owner": userId,
+      })
     })
       .then((res) => {
         if (res.status === 200) {
@@ -48,8 +60,8 @@ class MainApi {
       });
   }
 
-  deleteArticle(token) {
-    return fetch(`${this.options.baseUrl}/articles`, {
+  deleteArticle(token, id) {
+    return fetch(`${this.options.baseUrl}/articles/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -114,7 +126,7 @@ class MainApi {
   }
 
   logOut() {
-    
+
   }
 }
 

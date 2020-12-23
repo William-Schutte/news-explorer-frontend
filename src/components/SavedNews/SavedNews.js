@@ -4,12 +4,12 @@ import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader'
 import { CurrentUserContext } from '../App/App'
 import './SavedNews.css'
 
-const SavedNews = ({ articles }) => {
+const SavedNews = ({ articles, handleSignOut }) => {
   const user = useContext(CurrentUserContext)
 
   return (
     <main className="savedNews">
-      <Navbar alt="true" user={user} />
+      <Navbar alt="true" user={user} handleSignOut={handleSignOut} />
       <SavedNewsHeader savedNews={articles} />
     </main>
   )

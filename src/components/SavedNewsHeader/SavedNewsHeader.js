@@ -8,6 +8,8 @@ const SavedNewsHeader = ({ savedNews }) => {
   const getKeywords = () => {
     if (savedNews.length > 0) {
       //get keywords
+      // show 3 or fewer keywords
+      // else: "a, b, and x more"
     }
     
     return "";
