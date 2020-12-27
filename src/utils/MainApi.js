@@ -35,7 +35,6 @@ class MainApi {
 
   saveArticle({ token, userId, article }) {
     const { title, text, date, source, link, image, keyword } = article;
-    console.log(article);
     return fetch(`${this.options.baseUrl}/articles`, {
       method: 'POST',
       headers: {
@@ -54,15 +53,18 @@ class MainApi {
       })
     })
       .then((res) => {
-        if (res.status === 200) {
+        if (res.status === 201) {
           return res.json();
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
   deleteArticle(token, id) {
     return fetch(`${this.options.baseUrl}/articles/${id}`, {
-      method: 'GET',
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`

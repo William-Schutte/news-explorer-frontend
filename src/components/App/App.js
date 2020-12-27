@@ -26,6 +26,7 @@ class App extends React.Component {
       searchError: false,
       regFail: false,
       popupType: 'signin',
+      currentKeyword: null,
       searchedNews: [],
       savedNews: [],
     }
@@ -83,33 +84,42 @@ class App extends React.Component {
     this.setState({ popupType: newType })
   }
 
-  checkSearchedForSaved(articles, keyword) {
-    const savedTitles = this.state.savedNews.map((article) => article.title);
+  checkSearchedForSaved(articles) {
+    const savedData = this.state.savedNews.map((article) => ({ title: article.title, _id: article._id }));
     const searchedArticles = articles.map((article) => {
-      return {
-        title: article.title,
-        text: article.content,
-        date: article.publishedAt,
-        source: article.source.name,
-        link: article.url,
-        image: article.urlToImage,
-        saved: (savedTitles.includes(article.title)),
-        keyword: keyword
+      const cool = savedData.filter((saved) => saved.title === article.title);
+      if (cool[0]) {
+        console.log(cool[0])
+      }
+      if (article.keyword) {
+        article._id = cool[0] && cool[0]._id;
+        return article;
+      } else {
+        return {
+          title: article.title,
+          text: article.content,
+          date: article.publishedAt,
+          source: article.source.name,
+          link: article.url,
+          image: article.urlToImage,
+          keyword: this.state.currentKeyword,
+          _id: cool[0] && cool[0]._id
+        }
       }
     });
-    return searchedArticles;
+    this.setState({ searchedNews: searchedArticles });
   }
 
   handleSearch(keyword) {
-    this.setState({ isLoading: true, noResults: false, searchError: false, searchedNews: [] });
+    this.setState({ isLoading: true, noResults: false, searchError: false, searchedNews: [], currentKeyword: keyword });
     newsApi.getNews(keyword)
       .then((newNews) => {
         if (newNews.error || newNews.status === "error") {
           this.setState({ noResults: true, searchError: true })
         } else if (newNews.totalResults != null) {
           if (newNews.totalResults > 0) {
-            const searched = this.checkSearchedForSaved(newNews.articles, keyword)
-            this.setState({ searchedNews: searched, isLoading: false })
+            this.checkSearchedForSaved(newNews.articles);
+            this.setState({ isLoading: false })
           } else {
             this.setState({ noResults: true });
           }
@@ -117,11 +127,25 @@ class App extends React.Component {
       });
   }
 
-  handleSaveArticleClick(articleData, saved) {
+  handleSaveArticleClick(articleData) {
     // Add to savedNews, update searchedNews card
     // or Remove from savedNews, update searchedNews card
-    if (saved) {
-      mainApi.deleteArticle(this.state.jwt, articleData.id)
+    if (articleData._id) {
+      mainApi.deleteArticle(this.state.jwt, articleData._id)
+        .then((article) => {
+          mainApi.getSavedNews(this.state.jwt)
+            .then((res) => {
+              this.setState({
+                savedNews: res.data,
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .then((res) => {
+          this.checkSearchedForSaved(this.state.searchedNews);
+        });
     } else {
       mainApi.saveArticle({
         token: this.state.jwt,
@@ -129,7 +153,8 @@ class App extends React.Component {
         article: articleData
       })
         .then((article) => {
-          this.setState({ savedNews: [...this.state.savedNews, {...article, saved: true} ]});
+          this.setState({ savedNews: [...this.state.savedNews, { ...article.data }] }, 
+            this.checkSearchedForSaved(this.state.searchedNews));
         });
     }
 

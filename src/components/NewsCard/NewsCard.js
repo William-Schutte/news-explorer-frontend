@@ -5,19 +5,13 @@ import { CurrentUserContext } from '../App/App'
 
 const NewsCard = ({ data, type, handleSaveApi }) => {
   const user = useContext(CurrentUserContext);
-  const [saved, setSaved] = React.useState(data.saved);
+  const [saved, setSaved] = React.useState((data._id) ? true : false);
 
-  
   function formatDate(date) {
     const dt = new Date(date);
     const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
       'September', 'October', 'November', 'December'];
-    return (month[dt.getMonth()] + ' ' + dt.getDay() + ', ' + dt.getFullYear());
-  }
-  
-  function cleanTitle(title) {
-    const i = title.lastIndexOf(' - ');
-    return title.slice(0, i);
+    return (month[dt.getMonth()] + ' ' + dt.getDate() + ', ' + dt.getFullYear());
   }
 
   function cleanText(text) {
@@ -29,7 +23,10 @@ const NewsCard = ({ data, type, handleSaveApi }) => {
   }
 
   function handleSaveClick() {
-    handleSaveApi(data, saved);
+    if (user === null) {
+      return;
+    }
+    handleSaveApi(data);
     setSaved(!saved);
   }
 
@@ -40,17 +37,17 @@ const NewsCard = ({ data, type, handleSaveApi }) => {
         {user === null && <div className="newsCard__help">Sign in to save articles</div>}
         {saved && <div className="newsCard__help">Remove from saved</div>}
         <div className="newsCard__btn">
-          {type === "saved" ? <i className="far fa-trash-alt"/> : <i className={`${saved ? `fas newsCard__saved` : `far`} fa-bookmark`}/>}
+          {type === "saved" ? <i className="far fa-trash-alt" /> : <i className={`${saved ? `fas newsCard__saved` : `far`} fa-bookmark`} />}
         </div>
       </button>
       {type === "saved" && <p className="newsCard__topic">{data.keyword}</p>}
       <div className="newsCard__container">
         <p className="newsCard__date">{formatDate(data.date)}</p>
-        <h4 className="newsCard__title">{cleanTitle(data.title)}</h4>
+        <h4 className="newsCard__title">{data.title}</h4>
         <p className="newsCard__text">{cleanText(data.text)}</p>
         <h5 className="newsCard__source">{data.source}</h5>
       </div>
-      
+
     </article>
   )
 }

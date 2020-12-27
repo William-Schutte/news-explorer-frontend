@@ -33,6 +33,6 @@ class NewsApi {
   }
 }
 
-const newsApi = new NewsApi('https://nomoreparties.co/news/v2/top-headlines?country=us&', '6762f5fdcafa45af81a68adb26a92e43');
+const newsApi = new NewsApi('https://nomoreparties.co/news/v2/everything?', '6762f5fdcafa45af81a68adb26a92e43');
 
 export default newsApi;
