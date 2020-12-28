@@ -49,9 +49,11 @@ class App extends React.Component {
       this.setState({ jwt: jwt });
       mainApi.getUser(jwt)
         .then((res) => {
-          this.setState({
-            activeUser: res.data,
-          })
+          if (res.data) {
+            this.setState({
+              activeUser: res.data,
+            })
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -59,16 +61,18 @@ class App extends React.Component {
 
       mainApi.getSavedNews(jwt)
         .then((res) => {
-          this.setState({
-            savedNews: res.data,
-          })
+          if (res.data) {
+            this.setState({
+              savedNews: res.data,
+            })
+          }
         })
         .catch((err) => {
           console.log(err);
         });
     }
 
-    if (searchedArticles.length > 0) {
+    if (searchedArticles) {
       this.setState({ searchedNews: searchedArticles })
     }
   }

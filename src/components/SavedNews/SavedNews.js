@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import Navbar from '../Navbar/Navbar'
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader'
-//import { CurrentUserContext } from '../App/App'
 import CurrentUserContext from '../../utils/CurrentUserContext';
 
 import './SavedNews.css'

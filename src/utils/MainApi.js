@@ -14,6 +14,8 @@ class MainApi {
       .then((res) => {
         if (res.status === 200) {
           return res.json();
+        } else {
+          throw new Error('Invalid JWT')
         }
       })
       .catch((err) => {
@@ -32,6 +34,8 @@ class MainApi {
       .then((res) => {
         if (res.status === 200) {
           return res.json();
+        } else {
+          throw new Error('Invalid JWT')
         }
       })
       .catch((err) => {

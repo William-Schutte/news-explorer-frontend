@@ -55,7 +55,7 @@ class NewsCard extends React.Component {
         {this.state.type === "saved" && <p className="newsCard__topic">{this.state.data.keyword}</p>}
         <div className="newsCard__container">
           <p className="newsCard__date">{this.formatDate(this.state.data.date)}</p>
-          <h4 className="newsCard__title">{this.state.data._id ? this.state.data._id : 'Not saved'}</h4>
+          <h4 className="newsCard__title">{this.state.data.title}</h4>
           <p className="newsCard__text">{this.cleanText(this.state.data.text)}</p>
           <h5 className="newsCard__source">{this.state.data.source}</h5>
         </div>
@@ -63,6 +63,5 @@ class NewsCard extends React.Component {
     )
   }
 }
-// NewsCard.contextType = CurrentUserContext;
 
 export default NewsCard
