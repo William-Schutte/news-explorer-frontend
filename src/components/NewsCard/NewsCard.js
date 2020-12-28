@@ -1,20 +1,28 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import './NewsCard.css'
 import notFoundImg from '../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.png'
-import { CurrentUserContext } from '../App/App'
+import CurrentUserContext from '../../utils/CurrentUserContext'
 
-const NewsCard = ({ data, type, handleSaveApi }) => {
-  const user = useContext(CurrentUserContext);
-  const [saved, setSaved] = React.useState((data._id) ? true : false);
-
-  function formatDate(date) {
+class NewsCard extends React.Component {
+  static contextType = CurrentUserContext;
+  constructor(props) {
+    super();
+    this.state = {
+      data: props.data,
+      type: props.type,
+      handleSaveApi: props.handleSaveApi,
+    }
+    this.handleSaveClick = this.handleSaveClick.bind(this);
+  }
+  
+  formatDate(date) {
     const dt = new Date(date);
     const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
       'September', 'October', 'November', 'December'];
     return (month[dt.getMonth()] + ' ' + dt.getDate() + ', ' + dt.getFullYear());
   }
 
-  function cleanText(text) {
+  cleanText(text) {
     if (text === null) {
       return "No summary available for this article";
     }
@@ -22,34 +30,38 @@ const NewsCard = ({ data, type, handleSaveApi }) => {
     return text.slice(0, i);
   }
 
-  function handleSaveClick() {
-    if (user === null) {
+  handleSaveClick() {
+    if (this.user === null) {
       return;
     }
-    handleSaveApi(data);
-    setSaved(!saved);
+    this.state.handleSaveApi(this.state.data);
+    // setSaved(!this.saved);
   }
 
-  return (
-    <article className="newsCard">
-      <img className="newsCard__img" src={data.image !== null ? data.image : notFoundImg} alt={data.title} />
-      <button className="newsCard__interact" onClick={handleSaveClick}>
-        {user === null && <div className="newsCard__help">Sign in to save articles</div>}
-        {saved && <div className="newsCard__help">Remove from saved</div>}
-        <div className="newsCard__btn">
-          {type === "saved" ? <i className="far fa-trash-alt" /> : <i className={`${saved ? `fas newsCard__saved` : `far`} fa-bookmark`} />}
-        </div>
-      </button>
-      {type === "saved" && <p className="newsCard__topic">{data.keyword}</p>}
-      <div className="newsCard__container">
-        <p className="newsCard__date">{formatDate(data.date)}</p>
-        <h4 className="newsCard__title">{data.title}</h4>
-        <p className="newsCard__text">{cleanText(data.text)}</p>
-        <h5 className="newsCard__source">{data.source}</h5>
-      </div>
+  render() {
+    const user = this.context;
 
-    </article>
-  )
+    return (
+      <article className="newsCard">
+        <img className="newsCard__img" src={this.state.data.image !== null ? this.state.data.image : notFoundImg} alt={this.state.data.title} />
+        <button className="newsCard__interact" onClick={this.handleSaveClick}>
+          {user === null && <div className="newsCard__help">Sign in to save articles</div>}
+          {this.state.data._id && <div className="newsCard__help">Remove from saved</div>}
+          <div className="newsCard__btn">
+            {this.state.type === "saved" ? <i className="far fa-trash-alt" /> : <i className={`${this.state.data._id ? `fas newsCard__saved` : `far`} fa-bookmark`} />}
+          </div>
+        </button>
+        {this.state.type === "saved" && <p className="newsCard__topic">{this.state.data.keyword}</p>}
+        <div className="newsCard__container">
+          <p className="newsCard__date">{this.formatDate(this.state.data.date)}</p>
+          <h4 className="newsCard__title">{this.state.data._id ? this.state.data._id : 'Not saved'}</h4>
+          <p className="newsCard__text">{this.cleanText(this.state.data.text)}</p>
+          <h5 className="newsCard__source">{this.state.data.source}</h5>
+        </div>
+      </article>
+    )
+  }
 }
+// NewsCard.contextType = CurrentUserContext;
 
 export default NewsCard

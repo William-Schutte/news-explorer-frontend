@@ -3,7 +3,8 @@ import Header from '../Header/Header'
 import Navbar from '../Navbar/Navbar'
 import SearchBar from '../SearchBar/SearchBar'
 import './Main.css'
-import { CurrentUserContext } from '../App/App';
+//import { CurrentUserContext } from '../App/App';
+import CurrentUserContext from '../../utils/CurrentUserContext';
 
 const Main = ({ handlePopup, handleSearch, handleSignOut, isOpen }) => {
   const user = React.useContext(CurrentUserContext);

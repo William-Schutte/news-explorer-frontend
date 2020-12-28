@@ -11,8 +11,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 import newsApi from '../../utils/NewsApi';
 import mainApi from '../../utils/MainApi';
-
-export const CurrentUserContext = React.createContext();
+import CurrentUserContext from '../../utils/CurrentUserContext';
 
 class App extends React.Component {
   constructor() {
@@ -88,9 +87,6 @@ class App extends React.Component {
     const savedData = this.state.savedNews.map((article) => ({ title: article.title, _id: article._id }));
     const searchedArticles = articles.map((article) => {
       const cool = savedData.filter((saved) => saved.title === article.title);
-      if (cool[0]) {
-        console.log(cool[0])
-      }
       if (article.keyword) {
         article._id = cool[0] && cool[0]._id;
         return article;
@@ -135,17 +131,15 @@ class App extends React.Component {
         .then((article) => {
           mainApi.getSavedNews(this.state.jwt)
             .then((res) => {
+              console.log("Article delete api")
               this.setState({
                 savedNews: res.data,
-              });
+              }, () => this.checkSearchedForSaved(this.state.searchedNews));
             })
             .catch((err) => {
               console.log(err);
             });
         })
-        .then((res) => {
-          this.checkSearchedForSaved(this.state.searchedNews);
-        });
     } else {
       mainApi.saveArticle({
         token: this.state.jwt,
@@ -153,8 +147,9 @@ class App extends React.Component {
         article: articleData
       })
         .then((article) => {
+          console.log("Article save api")
           this.setState({ savedNews: [...this.state.savedNews, { ...article.data }] }, 
-            this.checkSearchedForSaved(this.state.searchedNews));
+            () => this.checkSearchedForSaved(this.state.searchedNews));
         });
     }
 

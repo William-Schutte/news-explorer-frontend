@@ -1,7 +1,9 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import './Navbar.css'
-import { CurrentUserContext } from '../App/App';
+// import { CurrentUserContext } from '../App/App';
+import CurrentUserContext from '../../utils/CurrentUserContext';
+
 
 const Navbar = ({ alt, handlePopup, handleSignOut, isOpen }) => {
   const user = React.useContext(CurrentUserContext);
