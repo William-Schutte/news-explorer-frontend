@@ -2,7 +2,7 @@ import React from 'react'
 import NewsCard from '../NewsCard/NewsCard'
 import './NewsCardList.css'
 
-const NewsCardList = ({ type, articles, handleSave }) => {
+const NewsCardList = ({ type, articles, handleSave, handlePopup }) => {
   const [articleCount, setArticleCount] = React.useState(type === 'search' ? 3 : 30);
 
   function handleShowMore() {
@@ -15,7 +15,14 @@ const NewsCardList = ({ type, articles, handleSave }) => {
       <div className="newsCardList__container">
         {articles.map((article, i) => {
           if (i < articleCount) { 
-            return (<NewsCard data={article} key={i} type={type} handleSaveApi={handleSave} />)
+            return (
+              <NewsCard 
+                data={article} 
+                key={article._id ? article._id : i} 
+                type={type} 
+                handleSaveApi={handleSave}
+                handlePopup={handlePopup}
+              />);
           }
           return null;
         })}

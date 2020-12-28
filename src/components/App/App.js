@@ -9,6 +9,7 @@ import Popup from '../Popup/Popup';
 import Preloader from '../Preloader/Preloader';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
+
 import newsApi from '../../utils/NewsApi';
 import mainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../utils/CurrentUserContext';
@@ -25,7 +26,7 @@ class App extends React.Component {
       searchError: false,
       regFail: false,
       popupType: 'signin',
-      currentKeyword: null,
+      currentKeyword: '',
       searchedNews: [],
       savedNews: [],
     }
@@ -42,6 +43,7 @@ class App extends React.Component {
 
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
+    const searchedArticles = JSON.parse(localStorage.getItem('searchedArticles'));
 
     if (jwt) {
       this.setState({ jwt: jwt });
@@ -64,6 +66,10 @@ class App extends React.Component {
         .catch((err) => {
           console.log(err);
         });
+    }
+
+    if (searchedArticles.length > 0) {
+      this.setState({ searchedNews: searchedArticles })
     }
   }
 
@@ -103,6 +109,8 @@ class App extends React.Component {
         }
       }
     });
+
+    localStorage.setItem('searchedArticles', JSON.stringify(searchedArticles));
     this.setState({ searchedNews: searchedArticles });
   }
 
@@ -120,6 +128,9 @@ class App extends React.Component {
             this.setState({ noResults: true });
           }
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -136,10 +147,10 @@ class App extends React.Component {
                 savedNews: res.data,
               }, () => this.checkSearchedForSaved(this.state.searchedNews));
             })
-            .catch((err) => {
-              console.log(err);
-            });
         })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       mainApi.saveArticle({
         token: this.state.jwt,
@@ -148,8 +159,11 @@ class App extends React.Component {
       })
         .then((article) => {
           console.log("Article save api")
-          this.setState({ savedNews: [...this.state.savedNews, { ...article.data }] }, 
+          this.setState({ savedNews: [...this.state.savedNews, { ...article.data }] },
             () => this.checkSearchedForSaved(this.state.searchedNews));
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
 
@@ -174,12 +188,17 @@ class App extends React.Component {
         // If successful, close popup, change state
         this.componentDidMount();
         this.handlePopupOpen();
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
   onSignOut() {
     localStorage.removeItem('jwt');
-    this.setState({ activeUser: null, savedNews: [] });
+    this.setState({ activeUser: null, savedNews: [] }, () => {
+      this.checkSearchedForSaved(this.state.searchedNews);
+    });
   }
 
   render() {
@@ -197,7 +216,14 @@ class App extends React.Component {
               {/* If loading, will display the preloader or 'not found' error */}
               {this.state.isLoading && <Preloader noResults={this.state.noResults} error={this.state.searchError} />}
               {/* Once done loading will show articles */}
-              {this.state.searchedNews.length > 0 && <NewsCardList type="search" articles={this.state.searchedNews} handleSave={this.handleSaveArticleClick} />}
+              {this.state.searchedNews.length > 0 &&
+                <NewsCardList
+                  type="search"
+                  articles={this.state.searchedNews}
+                  handleSave={this.handleSaveArticleClick}
+                  handlePopup={this.handlePopupOpen}
+                />
+              }
               <About />
             </Route>
             <ProtectedRoute exact path="/savedNews">

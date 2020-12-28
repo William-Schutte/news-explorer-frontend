@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import './SavedNewsHeader.css'
-// import { CurrentUserContext } from '../App/App';
 import CurrentUserContext from '../../utils/CurrentUserContext';
 
 const SavedNewsHeader = ({ savedNews }) => {
@@ -8,12 +7,12 @@ const SavedNewsHeader = ({ savedNews }) => {
 
   const getKeywords = () => {
     if (savedNews.length > 0) {
+      // Maps unique keywords to key/count objects
       let keywords = savedNews.map((itm) => itm.keyword).filter((itm, i, arr) => {
         return (i === arr.indexOf(itm));
       }).map((itm) => ({ key: itm, count: 0 }));
 
-      // show 3 or fewer keywords
-      // else: "a, b, and x more"
+      // Counts instances of each keyword
       for (let i = 0; i < savedNews.length; i++) {
         for (let j = 0; j < keywords.length; j++) {
           if (keywords[j].key === savedNews[i].keyword) {
@@ -21,10 +20,14 @@ const SavedNewsHeader = ({ savedNews }) => {
           }
         }
       }
+
+      // Sorts keywords by count
       keywords.sort((a, b) => {
         return a.count > b.count;
       });
 
+      // Shows 3 or fewer keywords by amount
+      // else: "a, b, and x more"
       switch (keywords.length) {
         case (1):
           return keywords[0].key;
@@ -39,8 +42,6 @@ const SavedNewsHeader = ({ savedNews }) => {
           return `${keywords[0].key}, ${keywords[1].key}, and ${keywords.length - 2} more`;;
       }
     }
-
-    return "";
   }
 
   return (

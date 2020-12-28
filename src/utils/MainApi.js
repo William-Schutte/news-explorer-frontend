@@ -15,6 +15,9 @@ class MainApi {
         if (res.status === 200) {
           return res.json();
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -30,6 +33,9 @@ class MainApi {
         if (res.status === 200) {
           return res.json();
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -74,6 +80,9 @@ class MainApi {
         if (res.status === 200) {
           return res.json();
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -101,6 +110,9 @@ class MainApi {
         localStorage.setItem('jwt', data.token);
         return data.token;
       })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   register(values) {
@@ -124,11 +136,10 @@ class MainApi {
         } else {
           throw new Error('Unsuccessful registration');
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
-  }
-
-  logOut() {
-
   }
 }
 

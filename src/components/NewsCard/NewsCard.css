@@ -75,6 +75,11 @@
   font-size: 19px;
   align-items: center;
   justify-content: center;
+  transition: .1s ease;
+}
+
+.newsCard__btn:active {
+  transform: scale(.85, .85);
 }
 
 .newsCard__saved {

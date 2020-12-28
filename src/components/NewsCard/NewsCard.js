@@ -11,6 +11,7 @@ class NewsCard extends React.Component {
       data: props.data,
       type: props.type,
       handleSaveApi: props.handleSaveApi,
+      handlePopup: props.handlePopup
     }
     this.handleSaveClick = this.handleSaveClick.bind(this);
   }
@@ -30,12 +31,12 @@ class NewsCard extends React.Component {
     return text.slice(0, i);
   }
 
-  handleSaveClick() {
-    if (this.user === null) {
+  handleSaveClick(user) {
+    if (user === null) {
+      this.state.handlePopup();
       return;
     }
     this.state.handleSaveApi(this.state.data);
-    // setSaved(!this.saved);
   }
 
   render() {
@@ -44,7 +45,7 @@ class NewsCard extends React.Component {
     return (
       <article className="newsCard">
         <img className="newsCard__img" src={this.state.data.image !== null ? this.state.data.image : notFoundImg} alt={this.state.data.title} />
-        <button className="newsCard__interact" onClick={this.handleSaveClick}>
+        <button className="newsCard__interact" onClick={() => {this.handleSaveClick(user)}}>
           {user === null && <div className="newsCard__help">Sign in to save articles</div>}
           {this.state.data._id && <div className="newsCard__help">Remove from saved</div>}
           <div className="newsCard__btn">
