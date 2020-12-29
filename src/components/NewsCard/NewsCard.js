@@ -24,7 +24,7 @@ class NewsCard extends React.Component {
   }
 
   cleanText(text) {
-    if (text === null) {
+    if (text === null || text === undefined) {
       return "No summary available for this article";
     }
     const i = text.lastIndexOf(' [+');
