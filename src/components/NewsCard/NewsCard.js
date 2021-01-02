@@ -15,7 +15,7 @@ class NewsCard extends React.Component {
     }
     this.handleSaveClick = this.handleSaveClick.bind(this);
   }
-  
+
   formatDate(date) {
     const dt = new Date(date);
     const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
@@ -45,7 +45,7 @@ class NewsCard extends React.Component {
     return (
       <article className="newsCard">
         <img className="newsCard__img" src={this.state.data.image !== null ? this.state.data.image : notFoundImg} alt={this.state.data.title} />
-        <button className="newsCard__interact" onClick={() => {this.handleSaveClick(user)}}>
+        <button className="newsCard__interact" onClick={() => { this.handleSaveClick(user) }}>
           {user === null && <div className="newsCard__help">Sign in to save articles</div>}
           {this.state.data._id && <div className="newsCard__help">Remove from saved</div>}
           <div className="newsCard__btn">
@@ -53,12 +53,12 @@ class NewsCard extends React.Component {
           </div>
         </button>
         {this.state.type === "saved" && <p className="newsCard__topic">{this.state.data.keyword}</p>}
-        <div className="newsCard__container">
+        <a className="newsCard__container" href={this.state.data.link} target="_blank" rel="noreferrer">
           <p className="newsCard__date">{this.formatDate(this.state.data.date)}</p>
           <h4 className="newsCard__title">{this.state.data.title}</h4>
           <p className="newsCard__text">{this.cleanText(this.state.data.text)}</p>
           <h5 className="newsCard__source">{this.state.data.source}</h5>
-        </div>
+        </a>
       </article>
     )
   }
