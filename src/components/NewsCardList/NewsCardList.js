@@ -1,12 +1,13 @@
 import React from 'react'
 import NewsCard from '../NewsCard/NewsCard'
 import './NewsCardList.css'
+import { DISPLAY_ROW_NUMBER } from '../../utils/configData.json'
 
 const NewsCardList = ({ type, articles, handleSave, handlePopup }) => {
-  const [articleCount, setArticleCount] = React.useState(type === 'search' ? 3 : 30);
+  const [articleCount, setArticleCount] = React.useState(type === 'search' ? DISPLAY_ROW_NUMBER : 10 * DISPLAY_ROW_NUMBER);
 
   function handleShowMore() {
-    setArticleCount(articleCount + 3);
+    setArticleCount(articleCount + DISPLAY_ROW_NUMBER);
   }
 
   return (

@@ -1,8 +1,8 @@
 import React from 'react'
 import './SearchBar.css'
+import { SEARCHBAR_MOBILE_WIDTH } from '../../utils/configData.json'
 
 const SearchBar = ({ handleSearch, searching }) => {
-  const MOBILE_WIDTH = 500;
   const [width, setWidth] = React.useState(window.innerWidth);
   const [searchText, setSearchText] = React.useState('');
   const [placeholderText, setPlaceholderText] = React.useState('Enter topic');
@@ -31,13 +31,13 @@ const SearchBar = ({ handleSearch, searching }) => {
 
   return (
     <>
-    {width > MOBILE_WIDTH && (
+    {width > SEARCHBAR_MOBILE_WIDTH && (
       <div className="searchbar">
         <input type="text" value={searchText} onChange={handleSearchText} className="searchbar__text" placeholder={placeholderText} disabled={searching} />
         <button type="submit" className={`searchbar__button ${searching && "searchbar__button_disabled"}`} onClick={handleSubmit} disabled={searching}>Search</button>
       </div>
     )}
-    {width <= MOBILE_WIDTH && (
+    {width <= SEARCHBAR_MOBILE_WIDTH && (
       <>
         <div className="searchbar">
           <input type="text" value={searchText} onChange={handleSearchText} className="searchbar__text" placeholder={placeholderText} disabled={searching} />

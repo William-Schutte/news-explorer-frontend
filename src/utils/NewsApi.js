@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { SEARCH_TIMEFRAME, NEWS_AUTH_KEY, NEWS_PROXY } from '../utils/configData.json';
 
 class NewsApi {
   constructor(newsUrl, apiKey) {
@@ -9,7 +10,7 @@ class NewsApi {
   _generateUrl(keyword) {
     const searchTerm = encodeURI(keyword);
     let today = moment().format('YYYY-MM-DD');
-    let lastWeek = moment().subtract(7, 'days').format('YYYY-MM-DD');
+    let lastWeek = moment().subtract(SEARCH_TIMEFRAME, 'days').format('YYYY-MM-DD');
 
     const uri = [
       "q=" + searchTerm,
@@ -30,6 +31,6 @@ class NewsApi {
   }
 }
 
-const newsApi = new NewsApi('https://nomoreparties.co/news/v2/everything?', '6762f5fdcafa45af81a68adb26a92e43');
+const newsApi = new NewsApi(NEWS_PROXY, NEWS_AUTH_KEY);
 
 export default newsApi;

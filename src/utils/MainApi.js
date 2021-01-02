@@ -1,3 +1,5 @@
+import { API_URL } from '../utils/configData.json'
+
 class MainApi {
   constructor(options) {
     this.options = options;
@@ -106,7 +108,6 @@ class MainApi {
 
   register(values) {
     const { email, password, username } = values;
-    // return Promise.resolve(true);
     return fetch(`${this.options.baseUrl}/signup`, {
       method: 'POST',
       headers: {
@@ -130,7 +131,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: "https://api.ws.news.students.nomoreparties.site"
+  baseUrl: API_URL
 });
 
 export default mainApi;

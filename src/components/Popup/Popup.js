@@ -4,9 +4,10 @@ import exitIcon from '../../images/back.png'
 import PopupSignin from './PopupSignin'
 import PopupSignup from './PopupSignup'
 import PopupSignupSuccess from './PopupSignupSuccess'
+import { POPUP_MOBILE_WIDTH } from '../../utils/configData.json'
+
 
 const Popup = ({ isOpen, regFail, handlePopup, popupType, changePopup, handleSignin, handleSignup }) => {
-  const MOBILE_WIDTH = 550;
   const [width, setWidth] = React.useState(window.innerWidth);
 
   React.useEffect(() => {
@@ -20,7 +21,7 @@ const Popup = ({ isOpen, regFail, handlePopup, popupType, changePopup, handleSig
   return (
     <div className={`popup ${isOpen ? `popup_open` : ``}`}>
       <div className="popup__container">
-        {width > MOBILE_WIDTH && <button className="popup__close" onClick={handlePopup}><img src={exitIcon} alt="Close Icon"/></button>}
+        {width > POPUP_MOBILE_WIDTH && <button className="popup__close" onClick={handlePopup}><img src={exitIcon} alt="Close Icon"/></button>}
         {popupType === 'signin' && <PopupSignin changePopupType={changePopup} onSubmit={handleSignin} />}
         {popupType === 'signup' && <PopupSignup changePopupType={changePopup} onSubmit={handleSignup} regFail={regFail} />}
         {popupType === 'success' && <PopupSignupSuccess changePopupType={changePopup} />}

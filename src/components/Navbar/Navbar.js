@@ -2,12 +2,12 @@ import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import './Navbar.css'
 import CurrentUserContext from '../../utils/CurrentUserContext';
+import { NAVBAR_MOBILE_WIDTH } from '../../utils/configData.json'
 
 
 const Navbar = ({ alt, handlePopup, handleSignOut, isOpen }) => {
   const user = React.useContext(CurrentUserContext);
 
-  const MOBILE_WIDTH = 700;
   const [width, setWidth] = React.useState(window.innerWidth);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
@@ -31,7 +31,7 @@ const Navbar = ({ alt, handlePopup, handleSignOut, isOpen }) => {
   return (
     <nav className={`navbar ${alt ? `navbar_alt` : ``} ${isMenuOpen}`}>
       <NavLink className={`navbar__logo ${(alt && !isMenuOpen) ? `navbar__color_alt` : ``}`} to="/">NewsExplorer</NavLink>
-      {(width > MOBILE_WIDTH) && (
+      {(width > NAVBAR_MOBILE_WIDTH) && (
         <>
           <NavLink exact to="/" className="navbar__link" activeClassName={`${alt ? `navbar__link_active_alt` : `navbar__link_active`}`}>
             <p className={`navbar__link-text ${alt && `navbar__color_alt`}`}>Home</p>
@@ -48,7 +48,7 @@ const Navbar = ({ alt, handlePopup, handleSignOut, isOpen }) => {
         </>
       )}
 
-      {(width <= MOBILE_WIDTH) && (
+      {(width <= NAVBAR_MOBILE_WIDTH) && (
         <>
           {isOpen ? <button className={`navbar__menu-icon ${alt && `navbar__color_alt`}`} onClick={handlePopup}><i className="fas fa-times" /></button>
           : <button className={`navbar__menu-icon ${alt && `navbar__color_alt`}`} onClick={handleMenu}><i className="fas fa-equals" /></button>}

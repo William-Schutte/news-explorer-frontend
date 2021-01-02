@@ -12,7 +12,6 @@ const ProtectedRoute = (props) => {
       props.handlePopup();
       return <Redirect to="/" />;
     }
-    
   }
 
   return (

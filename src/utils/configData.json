@@ -1,0 +1,11 @@
+{
+  "SEARCH_TIMEFRAME": 7,
+  "DISPLAY_ROW_NUMBER": 3,
+  "NEWS_AUTH_KEY": "6762f5fdcafa45af81a68adb26a92e43",
+  "NEWS_PROXY": "https://nomoreparties.co/news/v2/everything?",
+  "API_URL": "https://api.ws.news.students.nomoreparties.site",
+  "FOOTER_MOBILE_WIDTH": 700,
+  "NAVBAR_MOBILE_WIDTH": 700,
+  "POPUP_MOBILE_WIDTH": 550,
+  "SEARCHBAR_MOBILE_WIDTH": 500
+}
