@@ -1,7 +1,7 @@
 import React from 'react'
 import './SearchBar.css'
 
-const SearchBar = ({ handleSearch }) => {
+const SearchBar = ({ handleSearch, searching }) => {
   const MOBILE_WIDTH = 500;
   const [width, setWidth] = React.useState(window.innerWidth);
   const [searchText, setSearchText] = React.useState('');
@@ -33,16 +33,16 @@ const SearchBar = ({ handleSearch }) => {
     <>
     {width > MOBILE_WIDTH && (
       <div className="searchbar">
-        <input type="text" value={searchText} onChange={handleSearchText} className="searchbar__text" placeholder={placeholderText} />
-        <button type="submit" className="searchbar__button" onClick={handleSubmit} >Search</button>
+        <input type="text" value={searchText} onChange={handleSearchText} className="searchbar__text" placeholder={placeholderText} disabled={searching} />
+        <button type="submit" className={`searchbar__button ${searching && "searchbar__button_disabled"}`} onClick={handleSubmit} disabled={searching}>Search</button>
       </div>
     )}
     {width <= MOBILE_WIDTH && (
       <>
         <div className="searchbar">
-          <input type="text" className="searchbar__text" placeholder={placeholderText} />
+          <input type="text" value={searchText} onChange={handleSearchText} className="searchbar__text" placeholder={placeholderText} disabled={searching} />
         </div>
-        <button type="submit" className="searchbar__button">Search</button>
+        <button type="submit" className={`searchbar__button ${searching && "searchbar__button_disabled"}`} onClick={handleSubmit} disabled={searching}>Search</button>
       </>
     )}
     </>

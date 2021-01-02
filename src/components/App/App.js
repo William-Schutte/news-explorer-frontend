@@ -216,6 +216,7 @@ class App extends React.Component {
                 handleSearch={this.handleSearch}
                 handleSignOut={this.onSignOut}
                 isOpen={this.state.isPopupOpen}
+                searching={this.state.isLoading}
               />
               {/* If loading, will display the preloader or 'not found' error */}
               {this.state.isLoading && <Preloader noResults={this.state.noResults} error={this.state.searchError} />}
