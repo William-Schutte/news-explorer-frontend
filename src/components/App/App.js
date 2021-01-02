@@ -230,7 +230,7 @@ class App extends React.Component {
               }
               <About />
             </Route>
-            <ProtectedRoute exact path="/savedNews">
+            <ProtectedRoute exact path="/savedNews" handlePopup={this.handleSigninOpen}>
               <SavedNews articles={this.state.savedNews} handleSignOut={this.onSignOut} />
               <NewsCardList type="saved" articles={this.state.savedNews} handleSave={this.handleSaveArticleClick} />
             </ProtectedRoute>

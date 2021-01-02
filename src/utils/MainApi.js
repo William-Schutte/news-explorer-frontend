@@ -18,9 +18,6 @@ class MainApi {
           throw new Error('Invalid JWT')
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   getSavedNews(token) {
@@ -38,9 +35,6 @@ class MainApi {
           throw new Error('Invalid JWT')
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   saveArticle({ token, userId, article }) {
@@ -67,9 +61,6 @@ class MainApi {
           return res.json();
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   deleteArticle(token, id) {
@@ -85,9 +76,6 @@ class MainApi {
           return res.json();
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
 
@@ -114,9 +102,6 @@ class MainApi {
         localStorage.setItem('jwt', data.token);
         return data.token;
       })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   register(values) {
@@ -141,9 +126,6 @@ class MainApi {
           throw new Error('Unsuccessful registration');
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 }
 

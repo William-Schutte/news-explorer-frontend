@@ -27,9 +27,6 @@ class NewsApi {
       .then((res) => {
         return res.json();
       })
-      .catch((err) => {
-        return { error: err }
-      });
   }
 }
 

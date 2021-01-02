@@ -5,11 +5,19 @@ import CurrentUserContext from '../../utils/CurrentUserContext';
 const ProtectedRoute = (props) => {
   const user = useContext(CurrentUserContext);
 
+  const redirectAction = () => {
+    if (user) {
+      return <>{props.children}</>
+    } else {
+      props.handlePopup();
+      return <Redirect to="/" />;
+    }
+    
+  }
+
   return (
     <Route>
-      {
-        () => user ? <>{props.children}</> : <Redirect to="/" />
-      }
+      {redirectAction}
     </Route>
   )
 }

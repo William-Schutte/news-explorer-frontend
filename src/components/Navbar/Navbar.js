@@ -54,11 +54,11 @@ const Navbar = ({ alt, handlePopup, handleSignOut, isOpen }) => {
           : <button className={`navbar__menu-icon ${alt && `navbar__color_alt`}`} onClick={handleMenu}><i className="fas fa-equals" /></button>}
           <div className={`navbar__filter ${isMenuOpen ? `navbar__filter_active` : ``}`} />
           <menu className={`navbar__menu ${isMenuOpen ? `navbar__menu_open` : ``}`}>
-            <Link exact to="/" className="navbar__menu-link">
+            <Link exact="true" to="/" className="navbar__menu-link">
               <p className={`navbar__menu-link-text`}>Home</p>
             </Link>
             {user != null &&
-              <Link exact to="/savedNews" className="navbar__menu-link">
+              <Link exact="true" to="/savedNews" className="navbar__menu-link">
                 <p className={`navbar__menu-link-text`}>Saved Articles</p>
               </Link>}
             {user != null ?
