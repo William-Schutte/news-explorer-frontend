@@ -3,14 +3,16 @@ import Header from '../Header/Header'
 import Navbar from '../Navbar/Navbar'
 import SearchBar from '../SearchBar/SearchBar'
 import './Main.css'
+import CurrentUserContext from '../../utils/CurrentUserContext';
 
+const Main = ({ handlePopup, handleSearch, handleSignOut, isOpen, searching }) => {
+  const user = React.useContext(CurrentUserContext);
 
-const Main = ({ handlePopup, user, isOpen }) => {
   return (
     <main className="main">
-        <Navbar handlePopup={handlePopup} user={user} isOpen={isOpen} />
+        <Navbar handlePopup={handlePopup} handleSignOut={handleSignOut} user={user} isOpen={isOpen} />
         <Header />
-        <SearchBar />
+        <SearchBar handleSearch={handleSearch} searching={searching}/>
     </main>
   )
 }

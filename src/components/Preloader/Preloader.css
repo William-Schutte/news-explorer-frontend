@@ -47,12 +47,12 @@
 
 .preloader__notfound-text {
 	background-color: none;
-	color: #b6bcbf;
+	color: #aaa;
 	font-size: 18px;
 	line-height: 24px;
 	text-align: center;
 	margin: 0 0 80px;
-	width: 250px;
+	max-width: 370px;
 	align-self: center;
 }
 

@@ -75,6 +75,11 @@
   font-size: 19px;
   align-items: center;
   justify-content: center;
+  transition: .1s ease;
+}
+
+.newsCard__btn:active {
+  transform: scale(.85, .85);
 }
 
 .newsCard__saved {
@@ -104,6 +109,8 @@
   flex-direction: column;
   padding: 20px 24px 24px;
   flex-grow: 1;
+  text-decoration: none;
+  color: inherit;
 }
 
 .newsCard__date {

@@ -53,6 +53,14 @@
   background-color: #2a65cc;
 }
 
+.searchbar__button_disabled {
+  background-color: #8eb7ff;
+  cursor: default;
+}
+
+.searchbar__button_disabled:hover {
+  background-color: #8eb7ff;
+}
 
 @media screen and (min-width: 501px) and (max-width: 768px) {
   .searchbar {
