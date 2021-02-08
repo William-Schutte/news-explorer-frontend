@@ -1,6 +1,8 @@
 # News Explorer
 ### William Schutte, 2020
 
+### [Click Here to View This Project!](https://ws.news.students.nomoreparties.site/)
+
 #### Functionality
 Search for news that actually interests you! Type in a search term and you will be presented with
 relevant recent news to feed your curiosity. Create an account to save articles for later.
@@ -8,7 +10,7 @@ relevant recent news to feed your curiosity. Create an account to save articles 
 #### Overview
 This single page application was bootstrapped with Create React App and represents the final 
 capstone project for the Full Stack Web Developer program at Practicum. Given that this course
-covers the entire stack, the (backend)[https://github.com/William-Schutte/news-explorer-api] is 
+covers the entire stack, [the backend](https://github.com/William-Schutte/news-explorer-api) is 
 also part of the project.
 
 #### Techniques
